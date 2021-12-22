@@ -181,6 +181,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     SEND_STRING(SS_LALT("`") SS_TAP(X_U));
                 }
                 return false;
+            case KC_COMM: // «
+                    SEND_STRING(SS_LALT("\\"));
+                return false;
+            case KC_DOT: // »
+                    SEND_STRING(SS_LSFT(SS_LALT("\\")));
+                return false;
         }
     }
     return true;
