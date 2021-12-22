@@ -68,9 +68,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Down Layer: French (handled by process_record_user)
  *
  * ,------------------------------------------.                              ,------------------------------------------.
- * |       |      |   È  |   É  |   Ê  |   €  |                              |      |  Ù   |  Î   |  Ï   |      |       |
+ * |       |      |   È  |   É  |   Ê  |      |                              |      |  Ù   |  Î   |  Ô   |      |       |
  * |-------+------+------+------+------+------|                              |------+------+------+------+------+-------|
- * |       |   À  |      |      |      |      |                              |      |      |      |      |      |       |
+ * |       |   À  |      |   €  |      |      |                              |      |      |  Ï   |      |      |       |
  * |-------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-------|
  * |  LSFT |      |      |   Ç  |      |      |      | LCTL |  | RCTL |      |      |      |  «   |  »   |      | RSFT  |
  * `---------------------+------+------+------+------+------|  |------+------+------+------+------+---------------------'
@@ -177,7 +177,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     SEND_STRING(SS_LALT("i") SS_TAP(X_E));
                 }
                 return false;
-            case KC_T: // €
+            case KC_D: // €
                 SEND_STRING(SS_LSFT(SS_LALT("2")));
                 return false;
             case KC_I: // Î
@@ -187,11 +187,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     SEND_STRING(SS_LALT("i") SS_TAP(X_I));
                 }
                 return false;
-            case KC_O: // Ï
+            case KC_K: // Ï
                 if (check_and_reset_shift()) {
                     SEND_STRING(SS_LALT("u") SS_LSFT(SS_TAP(X_I)));
                 } else {
                     SEND_STRING(SS_LALT("u") SS_TAP(X_I));
+                }
+                return false;
+            case KC_O: // Ô
+                if (check_and_reset_shift()) {
+                    SEND_STRING(SS_LALT("i") SS_LSFT(SS_TAP(X_O)));
+                } else {
+                    SEND_STRING(SS_LALT("i") SS_TAP(X_O));
                 }
                 return false;
             case KC_U: // Ù
