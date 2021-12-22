@@ -21,7 +21,8 @@ enum layers {
     QWERTY = 0,
     RAISE,
     LOWER,
-    NAVIGATION
+    NAVIGATION,
+    MOUSE
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -86,19 +87,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer
  *
  * ,------------------------------------------.                              ,------------------------------------------.
- * |       |      | LEFT |  UP  | RIGT | PGUP |                              | VOL+ | PREV | PLAY | NEXT |      | STOP  |
+ * |       | LEFT |  UP  |      | PGUP |      |                              |      | VOL+ |      | PLAY | NEXT |       |
  * |-------+------+------+------+------+------|                              |------+------+------+------+------+-------|
- * |       |      |      | DOWN |      | PGDN |                              | VOL- |      |      |      |      |       |
+ * |       |      | DOWN | RGHT | PGDN |      |                              |      | VOL- | PREV | STOP |      |       |
  * |-------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-------|
- * |  LSFT |      |      |      |      |      |      | LCTL |  | RCTL |      | MUTE |      |      |      |      | RSFT  |
+ * |  LSFT |      |      |      |      |      |      | LCTL |  | RCTL |      |      | MUTE |      |      |      | MOUSE |
  * `---------------------+------+------+------+------+------|  |------+------+------+------+------+---------------------'
  *                       |      | LALT | RAISE| SPCE | LGUI |  | ENTR | SPCE |LOWER | RALT |      |
  *                       `----------------------------------'  `----------------------------------'
  */
     [NAVIGATION] = LAYOUT(
-        XXXXXXX, XXXXXXX, KC_LEFT, KC_UP  , KC_RGHT, KC_PGUP,                                     KC_VOLU, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, KC_MSTP,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_DOWN, XXXXXXX, KC_PGDN,                                     KC_VOLD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+        XXXXXXX, KC_LEFT, KC_UP  , XXXXXXX, KC_PGUP, XXXXXXX,                                     XXXXXXX, KC_VOLU, XXXXXXX, KC_MPLY, KC_MNXT, XXXXXXX  ,
+        XXXXXXX, XXXXXXX, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,                                     XXXXXXX, KC_VOLD, KC_MPRV, KC_MSTP, XXXXXXX, XXXXXXX  ,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, MO(MOUSE),
+                                   XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX
+    ),
+/*
+ * Navigation Layer
+ *
+ * ,------------------------------------------.                              ,------------------------------------------.
+ * |  MS2  |  MSL |  MSU |  MS1 |      |      |                              |      |      |      | MSWU | MSWR |       |
+ * |-------+------+------+------+------+------|                              |------+------+------+------+------+-------|
+ * |       |      |  MSD |  MSR |      |      |                              |      |      | MSWL | MSWD |      |       |
+ * |-------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-------|
+ * |  LSFT |      |      |      |      |      |      | LCTL |  | RCTL |      |      |      |      |      |      | MOUSE |
+ * `---------------------+------+------+------+------+------|  |------+------+------+------+------+---------------------'
+ *                       |      | LALT | RAISE| SPCE | LGUI |  | ENTR | SPCE |LOWER | RALT |      |
+ *                       `----------------------------------'  `----------------------------------'
+ */
+    [MOUSE] = LAYOUT(
+        KC_BTN2, KC_MS_L, KC_MS_U, KC_BTN1, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_U, KC_WH_R, XXXXXXX,
+        XXXXXXX, XXXXXXX, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, KC_WH_L, KC_WH_U, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                                    XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX
     ),
 };
@@ -358,6 +378,9 @@ static void render_status(void) {
             break;
         case NAVIGATION:
             oled_write_P(PSTR("Navigation\n"), false);
+            break;
+        case MOUSE:
+            oled_write_P(PSTR("Mouse\n"), false);
             break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);
