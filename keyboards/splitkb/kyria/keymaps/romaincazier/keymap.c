@@ -78,8 +78,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                       `----------------------------------'  `----------------------------------'
  */
     [LOWER] = LAYOUT(
-        XXXXXXX, XXXXXXX, _______, _______, _______, _______,                                     XXXXXXX, _______, _______, _______, XXXXXXX, XXXXXXX,
-        XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, _______, _______, _______, XXXXXXX,                                     XXXXXXX, _______, _______, _______, XXXXXXX, XXXXXXX,
+        XXXXXXX, _______, XXXXXXX, _______, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX,
         _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, _______,
                                    XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX
     ),
@@ -106,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer
  *
  * ,------------------------------------------.                              ,------------------------------------------.
- * |  MS2  |  MSL |  MSU |  MS1 |      |      |                              |      |      |      | MSWU | MSWR |       |
+ * |  MS2  |  MSL |  MSU |  MS1 |      |      |                              |      |      |      | MSWD | MSWR |       |
  * |-------+------+------+------+------+------|                              |------+------+------+------+------+-------|
- * |       |      |  MSD |  MSR |      |      |                              |      |      | MSWL | MSWD |      |       |
+ * |       |      |  MSD |  MSR |      |      |                              |      |      | MSWL | MSWU |      |       |
  * |-------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-------|
  * |  LSFT |      |      |      |      |      |      | LCTL |  | RCTL |      |      |      |      |      |      | MOUSE |
  * `---------------------+------+------+------+------+------|  |------+------+------+------+------+---------------------'
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                       `----------------------------------'  `----------------------------------'
  */
     [MOUSE] = LAYOUT(
-        KC_BTN2, KC_MS_L, KC_MS_U, KC_BTN1, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_U, KC_WH_R, XXXXXXX,
+        KC_BTN2, KC_MS_L, KC_MS_U, KC_BTN1, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_D, KC_WH_R, XXXXXXX,
         XXXXXXX, XXXXXXX, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, KC_WH_L, KC_WH_U, XXXXXXX, XXXXXXX,
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                                    XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX
