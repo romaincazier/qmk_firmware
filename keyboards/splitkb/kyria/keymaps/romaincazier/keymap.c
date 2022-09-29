@@ -15,15 +15,12 @@
  */
 #include QMK_KEYBOARD_H
 
-uint16_t copy_paste_timer;
-
 enum layers {
     QWERTY = 0,
     RAISE,
     LOWER,
     NAVIGATION,
-    PTR,
-	LED
+    LED
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -43,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [QWERTY] = LAYOUT(
         KC_ESC , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T     ,                                     KC_Y     , KC_U   , KC_I   , KC_O  , KC_P   , KC_BSPC,
         KC_TAB , KC_A   , KC_S   , KC_D   , KC_F   , KC_G     ,                                     KC_H     , KC_J   , KC_K   , KC_L  , KC_SCLN, KC_QUOT,
-        KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B     , KC_LALT,        ,        , KC_RCTL, KC_N     , KC_M   , KC_COMM, KC_DOT, KC_SLSH, KC_BSLS,
+        KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B     , KC_LALT, XXXXXXX, XXXXXXX, KC_RCTL, KC_N     , KC_M   , KC_COMM, KC_DOT, KC_SLSH, KC_BSLS,
                                    KC_LEFT, KC_RGHT, MO(RAISE), KC_SPC , KC_LGUI, KC_ENT , KC_SPC , MO(LOWER), KC_UP  , KC_DOWN
     ),
 /*           
@@ -62,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [RAISE] = LAYOUT(
         KC_GRV , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_MINS,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_EQL ,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX,
                                    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
@@ -81,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LOWER] = LAYOUT(
         XXXXXXX, _______, _______, _______, _______, XXXXXXX,                                     XXXXXXX, _______, _______, _______, XXXXXXX, XXXXXXX,
         XXXXXXX, _______, XXXXXXX, _______, XXXXXXX, XXXXXXX,                                     XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,
                                    _______, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX
     ),
 /*
@@ -99,27 +96,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [NAVIGATION] = LAYOUT(
         XXXXXXX, KC_LEFT, KC_UP  , XXXXXXX, KC_PGUP, XXXXXXX,                                     XXXXXXX, KC_VOLU, XXXXXXX, KC_MPLY, KC_MNXT, XXXXXXX,
-        MO(LED), XXXXXXX, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,                                     XXXXXXX, KC_VOLD, KC_MPRV, KC_MSTP, XXXXXXX, XXXXXXX,
-        MO(PTR), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-    ),
-/*
- * Pointer Layer
- *
- * ,-----------------------------------------.                              ,-----------------------------------------.
- * |  MS2 |  MSL |  MSU |  MS1 |      |      |                              |      |      |      | MSWD | MSWR |      |
- * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |      |      |  MSD |  MSR |      |      |                              |      |      | MSWL | MSWU |      |      |
- * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |  PTR |      |      |      |      |      | LALT |      |  |      | RCTL |      |      |      |      |      |      |
- * `--------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
- *                      | LEFT | RGHT | RISE | SPCE | LGUI |  | ENTR | SPCE | LOWR |  UP  | DOWN |
- *                      `----------------------------------'  `----------------------------------'
- */
-    [PTR] = LAYOUT(
-        KC_BTN2, KC_MS_L, KC_MS_U, KC_BTN1, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_D, KC_WH_R, XXXXXXX,
-        XXXXXXX, XXXXXXX, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, KC_WH_L, KC_WH_U, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,                                     XXXXXXX, KC_VOLD, KC_MPRV, KC_MSTP, XXXXXXX, XXXXXXX,
+        MO(LED), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
@@ -137,8 +115,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [LED] = LAYOUT(
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAI, RGB_HUI, RGB_VAI,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 };
@@ -419,9 +397,6 @@ static void render_status(void) {
             break;
         case NAVIGATION:
             oled_write_P(PSTR("Navigation\n"), false);
-            break;
-        case PTR:
-            oled_write_P(PSTR("Pointer\n"), false);
             break;
         case LED:
             oled_write_P(PSTR("LED\n"), false);
