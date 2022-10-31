@@ -390,10 +390,10 @@ static void render_status(void) {
             render_ep_logo();
             break;
         case LOWER:
-            oled_write_P(PSTR("Lower\n"), false);
+            oled_write_P(PSTR("French\n"), false);
             break;
         case RAISE:
-            oled_write_P(PSTR("Raise\n"), false);
+            oled_write_P(PSTR("Numbers\n"), false);
             break;
         case NAVIGATION:
             oled_write_P(PSTR("Navigation\n"), false);
