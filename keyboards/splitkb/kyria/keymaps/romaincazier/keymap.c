@@ -34,14 +34,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * | LSFT |   Z  |   X  |   C  |   V  |   B  | LALT |      |  |      | RCTL |  N   |  M   | ,  < | .  > | /  ? | \  | |
  * `--------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
- *                      | LEFT | RGHT | RISE | SPCE | LGUI |  | ENTR | SPCE | LOWR |  UP  | DOWN |
+ *                      | LEFT | RGHT | RISE | LGUI | SPCE |  | ENTR | SPCE | LOWR |  UP  | DOWN |
  *                      `----------------------------------'  `----------------------------------'
  */
     [QWERTY] = LAYOUT(
         KC_ESC , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T     ,                                     KC_Y     , KC_U   , KC_I   , KC_O  , KC_P   , KC_BSPC,
         KC_TAB , KC_A   , KC_S   , KC_D   , KC_F   , KC_G     ,                                     KC_H     , KC_J   , KC_K   , KC_L  , KC_SCLN, KC_QUOT,
         KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B     , KC_LALT, XXXXXXX, XXXXXXX, KC_RCTL, KC_N     , KC_M   , KC_COMM, KC_DOT, KC_SLSH, KC_BSLS,
-                                   KC_LEFT, KC_RGHT, MO(RAISE), KC_SPC , KC_LGUI, KC_ENT , KC_SPC , MO(LOWER), KC_UP  , KC_DOWN
+                                   KC_LEFT, KC_RGHT, MO(RAISE), KC_LGUI, KC_SPC , KC_ENT , KC_SPC , MO(LOWER), KC_UP  , KC_DOWN
     ),
 /*           
  * Top Layer: Numbers, Symbols
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * | LSFT |      |      |      |      |      | LALT |      |  |      | RCTL |      |      | [  { | ]  } |      |      |
  * `--------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
- *                      | LEFT | RGHT | RISE | SPCE | LGUI |  | ENTR | SPCE | LOWR |  UP  | DOWN |
+ *                      | LEFT | RGHT | RISE | LGUI | SPCE |  | ENTR | SPCE | LOWR |  UP  | DOWN |
  *                      `----------------------------------'  `----------------------------------'
  */
     [RAISE] = LAYOUT(
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * | LSFT |      |      |   Ç  |      |      | LALT |      |  |      | RCTL |      |      |  «   |  »   |      |      |
  * `--------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
- *                      | LEFT | RGHT | RISE | SPCE | LGUI |  | ENTR | SPCE | LOWR |  UP  | DOWN |
+ *                      | LEFT | RGHT | RISE | LGUI | SPCE |  | ENTR | SPCE | LOWR |  UP  | DOWN |
  *                      `----------------------------------'  `----------------------------------'
  */
     [LOWER] = LAYOUT(
@@ -89,15 +89,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |  LED |      | DOWN | RGHT | PGDN |      |                              |      | VOL- | PREV | STOP |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |  PTR |      |      |      |      |      | LALT |      |  |      | RCTL |      | MUTE |      |      |      |      |
+ * | LSFT |      |      |      |      |      | LALT |      |  |      | RCTL |      | MUTE |      |      |      |      |
  * `--------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
- *                      | LEFT | RGHT | RISE | SPCE | LGUI |  | ENTR | SPCE | LOWR |  UP  | DOWN |
+ *                      | LEFT | RGHT | RISE | LGUI | SPCE |  | ENTR | SPCE | LOWR |  UP  | DOWN |
  *                      `----------------------------------'  `----------------------------------'
  */
     [NAVIGATION] = LAYOUT(
         XXXXXXX, KC_LEFT, KC_UP  , XXXXXXX, KC_PGUP, XXXXXXX,                                     XXXXXXX, KC_VOLU, XXXXXXX, KC_MPLY, KC_MNXT, XXXXXXX,
-        XXXXXXX, XXXXXXX, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,                                     XXXXXXX, KC_VOLD, KC_MPRV, KC_MSTP, XXXXXXX, XXXXXXX,
-        MO(LED), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        MO(LED), XXXXXXX, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,                                     XXXXXXX, KC_VOLD, KC_MPRV, KC_MSTP, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
@@ -108,14 +108,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |  LED |      |      |      |      |      |                              |      |      |      | SAD  | HUD  | VAD  |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      |      |      |      |      |      | LALT |      |  |      | RCTL |      |      |      |      |      |      |
+ * | LSFT |      |      |      |      |      | LALT |      |  |      | RCTL |      |      |      |      |      |      |
  * `--------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
- *                      | LEFT | RGHT | RISE | SPCE | LGUI |  | ENTR | SPCE | LOWR |  UP  | DOWN |
+ *                      | LEFT | RGHT | RISE | LGUI | SPCE |  | ENTR | SPCE | LOWR |  UP  | DOWN |
  *                      `----------------------------------'  `----------------------------------'
  */
     [LED] = LAYOUT(
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAI, RGB_HUI, RGB_VAI,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD,
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
